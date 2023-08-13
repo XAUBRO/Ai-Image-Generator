@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Image Generator</title>
+  <link rel="stylesheet" type="text/css" href="style.css">
+  <style>
+    #randomBtn {
+      background-color: #9c61e0;
+      color: rgb(255, 255, 255);
+      border: none;
+      padding: 8px 16px;
+      font-size: 16px;
+      cursor: pointer;
+      border-radius: 4px;
+      margin-left: 10px;
+    }
+    #searchBtn {
+      padding: 12px 20px; 
+      font-size: 20px; 
+    }
+    #searchInput {
+      width: 600px; 
+    }
+    #randomBtn:hover {
+      background-color: #36db27;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="search-container">
+      <input type="text" id="searchInput" placeholder="Generate your images here">
+      <button id="searchBtn">
+        <div id="loadingAnimation" class="loader"></div>
+        <img id="searchBtnIcon" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAACXBIWXMAAAsTAAALEwEAmpwYAAAFJklEQVR4nO1bXWwUVRS+c2eRmmhirS9GpAlz7+6qCTFuH4QuDoga2XOXLpS2iFgepKCJP5GIUaNJQfwJ+oQEK4nRREmFkBgfCIkkmPhQoNrSNgFthFaR+KBxaflpu3S319xpUzfbZed3584Sv+S8TO6dme/MOfeec+4ZhP5HmRFN1agU1igU2hXCOjGFHkzhAqYsjSmbmpH09DXoEWPEWDFHzEUViTCLKoS9iwk7jSnkMGXcmYi50KsQ2IUiqyMo0IjF5mEKmzBhp5wTNhHCTmIKrUjXQyhQxAk8jwkMl434HEXAEKZsq3xFUFiGCRvwjfhcRfSjMIv7T3xB060KgY6ZBYxLlimFsn2oVq/yh3xkdQQT1hcA4gUCZ5CWfKCs3NUwW4kJXJZP9oYyqmqJFeUin8KUjQeAZGkhkMFastlb8gSaMIWsdHLW3SGrEtboDXktsQJTNiGflH1LUEnycXfswywacJ83kxG0CKgz8rV61XQoK52ES0tgA2Lbts1fmd7n+c0gCoG99tiHWTwgQY5XMoW0xFJr5HU95EWgM/++FH/joy/4wOAwn8hc53/+9Q//7NB3/EH2gjxXiMXmmfLHIrFx+bB7lrby02fP82LI5ab4e58clGQJsMVKZjfs5iEL6lv5L0MXuRle3NEhwwrOl8wgscjnfSAv8Hd61HAT35WgsWdKmX+30xvfvWQjP/PrBW4HdamXZbhBV3H20VVhP758Pppf+kCCAhgvWl5TRA3PR/ICT2/7UIoCFMp2FjF/1ueH2QdBAZjAjwXmn6qxW711S16qAihk0UKonuWv0sRav8nLVQDjor6BZv2fQrsfPl8IERlufWuvK2l7cw9PbtnBa+rW23WDt/MXwE6/yXuNzPVJvnv/YX5LtMGSAhTKvsoPgHrMJlQ/1MLPnnNv9uXG54eP2V8IMWV/mE34tPMorxQs3/C6lYXw93wFjJQafPvidXx8IsMrBfu/PmrFCtL5McBkqcEPN27jlYSu3p8tuACbtKyA+uZXeSXhVP+gTQXQ0i5wV91TPJvN8UrBl98ct+kC1HwR/PbYSV4paHjuHbuLIJhug3RlG0+PXOFBx/ET/TwUSdrbBhWLgZBYC0avXONBxZHvu414xXYgpNgIheMt2z1TgvhaYstyKzs/7uSPrH/N0vsXDYVVCmvsTPbKEqQmQ1qy4b90+P4n7rSbDnuhhMCkwwJOjsHcKkFiQaQbFUIhsMvJzdwoQV5JDNo9LYrGHS6MG17ZLUUBgutcBSDDDRz3+DmxhGUt2wNUFkdGQNTq5ubCEi5fHbNE/urYuOU921MhiY1mR2NDfijh/Y5DwTsaExAdmG4fJJQgjr5uBJFXSDkWC7PNyK/j8Xvjm/jBIz/wa2MTs8QHhy8ahUxLsbr3X3/AemttOFnvVYPEbYsbOXl0s1FK9530rEAOaWwJsgOFsn3yXthbUQjbgxw1SVHolf3ynjRUO2mSyguORqWTcCxwCWlJglxBg+UV0SI798tnVAqPIS+gElhXca2yNLHWE/IV1ywt2nq9bpYucIeRAH/5S4gwHZUVi4AGs4UWet0veFZRq1eJ9tNgdJNCztjnyZPzke/QIOams8y1ENZnvQW2XND1EKbQJjItH8mfwyT5LEJNKgoMdD0kmhAxhRNlNPcuI5+X/r+gGaKrwqIVTZy+uIsfICvuYdTwHP/4IBsLoVrU4MVBhELhAKbsJ0zYbzM/TOdmyvFp49o02QNirFG3r224Q/bro5sd/wJ74WSdF3LuywAAAABJRU5ErkJggg==">  
+      </button>
+      <button id="randomBtn">Random Image</button>
+    </div>
+    <main>
+      <div id="imageGrid"></div>
+    </main>
+  <script src="main.js"></script>
+  <script>
+    // Random prompts array
+    const randomPrompts = [
+        "a pencil and watercolor drawing of a bright city in the future with flying cars",
+        "a stern-looking owl dressed as a librarian, digital art",
+        "a sunlit indoor lounge area with a pool with clear water and another pool with translucent pastel pink water, next to a big window, digital art",
+        "3D render of a cute tropical fish in an aquarium on a dark blue background, digital art",
+        "a sea otter with a pearl earring by Johannes Vermeer",
+        "an oil painting portrait of a capybara wearing medieval royal robes and an ornate crown on a dark background",
+        "an astronaut lounging in a tropical resort in space, vaporwave",
+        "A flying bicycle with rainbow-colored wings",
+        "A surreal landscape made of floating books and flying birds",
+        "A steampunk cityscape with mechanical trees and clockwork animals",
+        "An underwater kingdom of mermaids and bioluminescent creatures",
+        "A futuristic city on the back of a giant turtle, floating in space",
+        "A group of fire-breathing dragons playing poker in a smoky tavern",
+        "A forest of talking trees with glowing eyes and animated expressions",
+        "A gigantic robot gardener tending to a garden of bioluminescent flowers",
+        "A world of candy, with cotton candy clouds and chocolate rivers",
+        "A herd of floating elephants with butterfly wings, gracefully soaring in the sky",
+        "A cyberpunk metropolis with neon-lit skyscrapers and holographic billboards",
+        "A surreal circus with acrobatic unicorns and juggling jellyfish",
+        "A magical library with moving books and enchanted quills",
+        "A dreamlike realm of floating islands, connected by rainbow bridges",
+        "An ancient temple guarded by statues that come to life at night",
+        "A cosmic dance party in space, with planets and stars as disco balls",
+        "A mysterious forest of bioluminescent mushrooms and glowing fireflies",
+        "A futuristic zoo featuring robotic animals from different galaxies",
+        "A fantastical underwater tea party with talking sea creatures",
+        "A city of sentient crystals, reflecting rainbows in every direction",
+    ]
+    // Get the "Random" button element and add a click event listener
+    const randomBtn = document.getElementById('randomBtn');
+    randomBtn.addEventListener('click', () => {
+      // Get a random prompt from the array
+      const randomPrompt = randomPrompts[Math.floor(Math.random() * randomPrompts.length)];
+      // Fill the search input with the random prompt
+      document.getElementById('searchInput').value = randomPrompt;
+      // Trigger the image generation
+      fetchImages();
+    })
+  </script>
+</body>
+</html>
