@@ -1,5 +1,5 @@
 // Define the API key
-const API_KEY = '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'
+const API_KEY = ''
 
 // Get the search button element and add a click event listener
 const searchBtn = document.getElementById('searchBtn');
